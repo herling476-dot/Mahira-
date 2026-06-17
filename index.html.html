@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Please Forgive Me ❤️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff9acb,#ffc1de,#ffd9ec);
+    overflow:hidden;
+}
+
+/* BOX */
+.box{
+    background:rgba(255,255,255,0.95);
+    padding:60px 50px;
+    border-radius:30px;
+    text-align:center;
+    box-shadow:0 25px 60px rgba(0,0,0,0.15);
+    width:520px;
+    animation: pop 0.6s ease;
+}
+
+@keyframes pop{
+    from{transform:scale(0.8);opacity:0;}
+    to{transform:scale(1);opacity:1;}
+}
+
+h1{
+    color:#ff2f8b;
+    font-size:2.4rem;
+    margin-bottom:15px;
+}
+
+#typing{
+    color:#555;
+    font-size:1.1rem;
+    min-height:40px;
+    margin-bottom:30px;
+}
+
+/* BUTTONS */
+.buttons{
+    position:relative;
+    height:110px;
+}
+
+button{
+    padding:14px 34px;
+    border:none;
+    border-radius:40px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+/* YES */
+#yesBtn{
+    background:linear-gradient(135deg,#ff2f8b,#ff6fb1);
+    color:white;
+    box-shadow:0 10px 20px rgba(255,47,139,0.3);
+}
+
+/* NO */
+#noBtn{
+    background:#e6e6e6;
+    position:fixed;
+    transition:0.12s ease;
+}
+
+/* LOVE SCREEN */
+.love-screen{
+    display:none;
+    text-align:center;
+    color:white;
+}
+
+.love-screen h1{
+    font-size:3.5rem;
+}
+
+.love-screen p{
+    font-size:1.7rem;
+    margin-top:20px;
+}
+
+/* HEARTS */
+.heart{
+    position:absolute;
+    color:#ff2d75;
+    font-size:30px;
+    animation:float 5s linear infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(100vh);opacity:1;}
+    to{transform:translateY(-120vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b5c7b6c7.mp3?filename=romantic-love-ambient-112191.mp3">
+</audio>
+
+<div class="box" id="questionBox">
+    <h1>Please forgive me 💖</h1>
+    <div id="typing"></div>
+
+    <div class="buttons">
+        <button id="yesBtn">Yes ❤️</button>
+        <button id="noBtn">No 😡</button>
+    </div>
+</div>
+
+<div class="love-screen" id="loveScreen">
+    <h1>💖💖💖💖💖Thank You!!!💖💖💖💖💖</h1>
+    <p style="size: 25px;">💖I Love You So So So So So So So So So much😍😍😍</p>
+    <p style="">Mahira, I won’t lie… ignoring you was a bad strategy on my part.
+
+Because somehow you still end up being the person I remember randomly during the day.
+
+That’s kind of unfair, don’t you think?
+
+Anyway, I’m here now—so try not to get too used to me disappearing again 😌</p>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const music = document.getElementById("music");
+
+/* typing */
+const text = "I made this just for you,I'll never ignore you.please forgive me😭🙏💕💕💕💕";
+let i = 0;
+
+function type(){
+    if(i < text.length){
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(type, 45);
+    }
+}
+type();
+
+/* INIT POSITION */
+noBtn.style.position = "fixed";
+noBtn.style.left = "60%";
+noBtn.style.top = "60%";
+
+/* ULTRA DODGE MODE */
+function moveNoBtn(){
+    const padding = 20;
+
+    const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+    const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
+
+/* mouse proximity */
+document.addEventListener("mousemove", (e) => {
+    const rect = noBtn.getBoundingClientRect();
+
+    const dx = e.clientX - (rect.left + rect.width/2);
+    const dy = e.clientY - (rect.top + rect.height/2);
+
+    const dist = Math.sqrt(dx*dx + dy*dy);
+
+    if(dist < 180){
+        moveNoBtn();
+    }
+});
+
+/* mobile + click protection */
+noBtn.addEventListener("touchstart", moveNoBtn);
+noBtn.addEventListener("click", moveNoBtn);
+
+/* YES BUTTON */
+yesBtn.addEventListener("click", () => {
+
+    music.play();
+
+    document.getElementById("questionBox").style.display = "none";
+    document.getElementById("loveScreen").style.display = "block";
+
+    document.body.style.background =
+        "linear-gradient(135deg,#ff2f8b,#ff77b7,#ffd6ec)";
+
+    for(let i=0;i<120;i++){
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random()*100 + "vw";
+        heart.style.animationDuration = (Math.random()*3+2) + "s";
+        document.body.appendChild(heart);
+    }
+});
+</script>
+
+</body>
+</html>
