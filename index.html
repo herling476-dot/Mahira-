@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌤️ Weather Dashboard</h1>
+            <p>Get weather information for any city</p>
+        </header>
+
+        <div class="search-section">
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="cityInput" 
+                    placeholder="Enter city name..." 
+                    autocomplete="off"
+                >
+                <button id="searchBtn">Search</button>
+                <button id="locationBtn" title="Use my location">📍</button>
+            </div>
+            <div id="suggestions" class="suggestions"></div>
+        </div>
+
+        <div id="loading" class="loading">Loading...</div>
+
+        <div id="error" class="error"></div>
+
+        <div id="weatherContainer" class="weather-container">
+            <!-- Current Weather -->
+            <div class="current-weather">
+                <div class="city-info">
+                    <h2 id="cityName"></h2>
+                    <p id="description"></p>
+                </div>
+                <div class="weather-main">
+                    <img id="weatherIcon" src="" alt="Weather icon">
+                    <div class="temperature">
+                        <span id="temp"></span>
+                        <span class="unit">°C</span>
+                    </div>
+                </div>
+                <div class="weather-details">
+                    <div class="detail">
+                        <span class="label">Feels Like</span>
+                        <span id="feelsLike"></span>
+                    </div>
+                    <div class="detail">
+                        <span class="label">Humidity</span>
+                        <span id="humidity"></span>
+                    </div>
+                    <div class="detail">
+                        <span class="label">Wind Speed</span>
+                        <span id="windSpeed"></span>
+                    </div>
+                    <div class="detail">
+                        <span class="label">Pressure</span>
+                        <span id="pressure"></span>
+                    </div>
+                    <div class="detail">
+                        <span class="label">Visibility</span>
+                        <span id="visibility"></span>
+                    </div>
+                    <div class="detail">
+                        <span class="label">UV Index</span>
+                        <span id="uvIndex"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5-Day Forecast -->
+            <div class="forecast-section">
+                <h3>5-Day Forecast</h3>
+                <div id="forecastContainer" class="forecast-container"></div>
+            </div>
+
+            <!-- Hourly Forecast -->
+            <div class="hourly-section">
+                <h3>Hourly Forecast (24 Hours)</h3>
+                <div id="hourlyContainer" class="hourly-container"></div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Weather data powered by <a href="https://openweathermap.org/" target="_blank">OpenWeatherMap</a></p>
+            <p>Last updated: <span id="lastUpdated"></span></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
